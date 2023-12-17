@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.site_list {
+    width: max-content;
+    height: max-content;
+    display: grid;
+    grid-template-columns: repeat(18, 50px);
+    grid-template-rows: repeat(2, 50px);
+    gap: 10px;
+    background-color: grey;
+    padding: 10px;
+}
+
+.site_list .site {
+    background-color: white;
+}
+
+#pick {
+    background-color: green;
+}
