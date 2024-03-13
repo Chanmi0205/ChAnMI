@@ -11,20 +11,20 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class Movie {
 
     @Id
-    @Column(length = 100)
-    private String Movie_PK;
-
-    @Column(name = "MOVIENAME", length = 1500)
+    @Column(name = "movieName", length = 1500)
     private String movieName;
 
-    @Column(name = "MOVIERUNTIME")
-    private int movieRuntime;
+    @Column
+    private int movieRunTime;
+
+    @Column(name = "movieImg", length = 300)
+    private String movieImg;
 
     protected Movie() {}
 
-    public Movie(String movieName, int movieRuntime) {
-        Movie_PK = RandomStringUtils.randomAlphanumeric(1);
+    public Movie(String movieName, int movieRunTime, String movieImg) {
         this.movieName = movieName;
-        this.movieRuntime = movieRuntime;
+        this.movieRunTime = movieRunTime;
+        this.movieImg = movieImg;
     }
 }

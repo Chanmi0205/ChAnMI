@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/contentReserveStyle.css}"
+          href="css/content_style.css" rel="stylesheet">
+</head>
+<body>
+
+<form action="" class="reserveForm" method="post" th:object="${reserveDateForm}">
+
+    <div class="reserveBox">
+
+        <header><a href="/" class="contentTitle">Movie</a></header>
+
+        <nav class="reserveNav">
+
+            <div class="reserveNavBox_1">
+                <a href="" class="content_nav_find_cinemaSite">영화관 좌석 조회</a>
+            </div>
+
+            <div class="reserveNavBox_2">
+                <a th:href="@{/member/setting}" th:text="|${loginMember.getID()}(${loginMember.getName()})님|">박찬미(Chanmi)님</a> <span>|</span>
+                <a th:href="@{/content/reserve/reserveMovieList}">예매 내역 확인</a> <span>|</span>
+                <a href="/logout">로그아웃</a>
+            </div>
+
+        </nav>
+
+        <section class="reserveSection_Date">
+
+            <div class="reserveSectionBox_MovieList">
+                <img th:src="${movieImg}" alt="">
+                <a th:text="${reserveDateForm.getMovieName()}"></a>
+                <p class="member_Error" th:errors="*{selectOpenMoviePK}"></p>
+            </div>
+
+            <div class="reserveSectionBox_OpenMovieList">
+                <aside class="reserveSection_openMovie" th:each="reserveDate : ${openMovieList}">
+                    <p class="reserveSectionBox_openMovieText" th:text="|${reserveDate.getTheater().getCinema().getAddress()}
+                  ${reserveDate.getTheater().getTheaterName()} ${#temporals.format(reserveDate.getOpenMovieStartTime(), 'yyyy-MM-dd HH:mm')}|"></p>
+                    <input type="radio" class="reserveSection_Radio" th:field="*{selectOpenMoviePK}" th:value="${reserveDate.getOpen_Movie_PK()}"/>
+                </aside>
+            <input type="submit" value="| 선택 |" class="reserveSectionBox_openMovieSubmit">
+            </div>
+
+
+
+        </section>
+
+        <footer class="reserveFooter">
+            <hr class="reserveFooterHr">
+            <a href="">도움말</a>
+            <span>|</span>
+            <span> 제작자 : 박찬미</span>
+
+        </footer>
+
+    </div>
+
+</form>
+
+</body>
+</html>

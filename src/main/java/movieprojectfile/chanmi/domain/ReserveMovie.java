@@ -11,26 +11,28 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class ReserveMovie {
 
     @Id
-    @Column(name = "RESERVEMOVIE_PK", length = 100)
-    private String ReserveMovie_PK;
+    @Column(name = "RESERVE_MOVIE_PK", length = 1500)
+    private String Reserve_Movie_PK;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "OPENMOVIE_PK")
+    @JoinColumn(name = "OPEN_MOVIE_PK")
     private OpenMovie openMovie;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Site_PK")
+    private Site site;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_PK")
     private Member member;
 
     public ReserveMovie() {
-        ReserveMovie_PK = RandomStringUtils.randomAlphanumeric(1);
     }
 
-    public void setOpenMovie(OpenMovie openMovie) {
+    public ReserveMovie(OpenMovie openMovie, Site site, Member member) {
+        Reserve_Movie_PK = RandomStringUtils.randomAlphanumeric(1500);
         this.openMovie = openMovie;
-    }
-
-    public void setMember(Member member) {
+        this.site = site;
         this.member = member;
     }
 }

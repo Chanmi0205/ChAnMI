@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/contentReserveSiteStyle.css}"
+          href="css/content_style.css" rel="stylesheet">
+</head>
+<body>
+
+<form action="/content/reserve/reserveMovieSite" class="reserveForm" method="post" th:object="${reserveSiteForm}">
+
+    <div class="reserveBox">
+
+        <header><a href="/" class="contentTitle">Movie</a></header>
+
+        <nav class="reserveNav">
+
+            <div class="content_nav_1">
+                <a href="" class="content_nav_find_cinemaSite">영화관 좌석 조회</a>
+            </div>
+
+            <div class="reserveNavBox_2">
+                <a th:href="@{/member/setting}" th:text="|${loginMember.getID()}(${loginMember.getName()})님|">박찬미(Chanmi)님</a> <span>|</span>
+                <a th:href="@{/content/reserve/reserveMovieList}">예매 내역 확인</a> <span>|</span>
+                <a href="/logout">로그아웃</a>
+            </div>
+
+        </nav>
+
+        <section class="reserveMovieSite_section">
+
+            <input type="hidden" name="openMoviePK" th:value="*{openMoviePK}"/>
+
+            <div class="reserveMovieSiteSection_IMG">
+                <img th:src="${movieImg}" alt="">
+                <a href="" th:text="${movieName}"></a>
+                <p th:each="err : ${#fields.globalErrors()}" class="member_Error" th:text="${err}"></p>
+            </div>
+
+            <article class="reserveMovieSiteBox">
+                <div class="reserveMovieSiteBox_siteList" th:style="|grid-template-columns: repeat(${theaterColumn}, 5vh); grid-template-rows: repeat(${theaterRow}, 5vh);|">
+                    <div th:class="${site.value.site_name}" id="reserveMovieSiteBox_siteBox" th:each="site : ${siteList}">
+                        <input type="checkbox" class="reserveMovieSiteBox_site" th:field="*{siteNameList}" th:value="${site.key}" th:if="${reserveSiteList.get(site.key) != null}"/>
+                    </div>
+                </div>
+
+            </article>
+
+            <article class="reserveMovieBox2_address">
+                <input type="submit" value="| 선택 |" class="reserveMovieBox2_addressSubmit">
+                <p class="reserveMovieSiteBox3_addressText" th:text="|${openMovie.getTheater().getCinema().getAddress()}
+                ${#temporals.format(openMovie.getOpenMovieStartTime(), 'yyyy-MM-dd HH:mm')}
+                ${openMovie.getTheater().getTheaterName()}
+                ${openMovie.getMovie().getMovieName()}|">경기도 하남시 ChAnMI | 2023년 12월 15일 18시 39분 | 초능력 대결전 ~날아라 수제김밥~</p>
+            </article>
+
+        </section>
+
+        <footer class="reserveFooter">
+            <hr class="reserveFooterHr">
+            <a href="">도움말</a>
+            <span>|</span>
+            <span> 제작자 : 박찬미</span>
+
+        </footer>
+
+    </div>
+</form>
+
+</body>
+</html>

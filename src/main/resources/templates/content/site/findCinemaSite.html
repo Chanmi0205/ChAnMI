@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/contentReserveSiteStyle.css}"
+          href="css/content_style.css" rel="stylesheet">
+
+</head>
+<body>
+
+<form class="selectCinemaBox" method="post">
+
+    <header><a href="/" class="contentTitle">Movie</a></header>
+
+    <nav class="reserveNav">
+
+        <div class="reserveNavBox_1">
+            <a href="">영화관 좌석 조회</a>
+        </div>
+
+        <div class="reserveNavBox_2">
+            <a th:href="@{/member/setting}" th:text="|${loginMember.getID()}(${loginMember.getName()})님|">박찬미(Chanmi)님</a> <span>|</span>
+            <a th:href="@{/content/reserve/reserveMovieList}">예매 내역 확인</a> <span>|</span>
+            <a href="/logout">로그아웃</a>
+        </div>
+
+    </nav>
+
+    <section class="selectCinemaSiteSection">
+
+        <article class="selectCinemaSiteSectionBox_address">
+
+            <a href="" class="selectCinemaSiteSectionBox_rollback">다시 조회</a>
+
+            <div class="selectCinemaSiteSectionBox_home"><a href="">홈으로 돌아가기</a></div>
+
+        </article>
+
+            <p class="selectCinemaSiteSectionBox_addressText" th:text="|${siteList.get(1).theater.getCinema().getAddress()} ${siteList.get(1).theater.getTheaterName()}|">'경기도 하남시 미사대로 750 스타필드 하남 1관'</p>
+
+        <div class="findCinemaSiteBox_siteList" th:style="|grid-template-columns: repeat(${theaterColumn}, 5vh); grid-template-rows: repeat(${theaterRow}, 5vh);|">
+            <div th:class="${site.site_name}" th:text="${site.site_name}" th:each="site : ${siteList}" id="findCinemaSite_siteBox"></div>
+        </div>
+
+    </section>
+
+    <footer class="reserveFooter">
+        <hr class="reserveFooterHr">
+        <a href="">도움말</a>
+        <span>|</span>
+        <span> 제작자 : 박찬미</span>
+
+    </footer>
+
+</form>
+
+</body>
+</html>

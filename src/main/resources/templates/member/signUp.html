@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link th:href="@{/css/style.css}"
+          href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <form action="" method="post" th:object="${memberForm}">
+        
+        <section class="member_section_signUp">
+            
+            <h2 class="member_title">ChAnMI SignUp</h2>
+            
+        <div class="member_input_list">
+            <input type="text" placeholder="아이디를 입력해주세요..." th:field="*{id}">
+            <input type="password" placeholder="비밀번호를 입력해주세요..." th:field="*{PW}">
+            <input type="password" placeholder="비밀번호를 한 번 더 입력해주세요..." th:field="*{oneMorePW}">
+            <input type="text" placeholder="사용하실 닉네임을 입력해주세요..." th:field="*{name}">
+        </div>
+            
+        <input type="submit" value="SignUp" class="member_section_submit">
+        
+        <div>
+            <p class="member_Error" th:errors="*{id}"></p>
+            <p class="member_Error" th:errors="*{name}"></p>
+            <p class="member_Error" th:errors="*{PW}"></p>
+            <p class="member_Error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+        </div>
+
+        </section>
+    </form>
+    
+</body>
+</html>

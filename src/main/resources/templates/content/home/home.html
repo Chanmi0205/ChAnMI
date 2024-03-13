@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link th:href="@{/css/contentHomeStyle.css}"
+          href="css/content_style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="homeBox">
+
+        <header><a href="/" class="contentTitle">Movie</a></header>
+
+        <nav class="homeNav">
+
+            <div class="homeNavBox_1">
+                <a href="" class="content_nav_find_cinemaSite">영화관 좌석 조회</a> 
+            </div>
+
+            <div class="homeNavBox_2">
+                <a th:onclick="|location.href='@{/member/login}'|">로그인</a> <span>|</span>
+                <a th:onclick="|location.href='@{/member/signUp}'|">회원가입</a>
+            </div>
+
+        </nav>
+
+        <section class="homeSection">
+
+            <div th:each="movie : ${movieList}">
+                <img th:src="${movie.getMovieImg()}" alt="">
+                <a th:href="@{/content/reserveMovieDate(movieName=${movie.getMovieName()})}" th:text="${movie.getMovieName()}"></a>
+            </div>
+
+        </section>
+
+        <footer class="homeFooter">
+            <hr class="homeFooterHr">
+            <a href="">도움말</a>
+            <span>|</span>
+            <span> 제작자 : 박찬미</span>
+             
+        </footer>
+
+    </div>
+    
+</body>
+</html>

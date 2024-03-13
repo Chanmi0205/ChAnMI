@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class JPAMemberRepository implements MemberRepository {
 
     @PersistenceContext
@@ -45,5 +46,42 @@ public class JPAMemberRepository implements MemberRepository {
         return em.createQuery("SELECT m FROM Member m WHERE m.ID =: ID", Member.class)
                 .setParameter("ID", ID).getSingleResult();
     }
+
+    @Override
+    public Member login(String ID, String PW) {
+        return em.createQuery("SELECT m FROM Member m WHERE m.ID =: ID AND m.PW =: PW", Member.class)
+                .setParameter("ID", ID)
+                .setParameter("PW", PW)
+                .getSingleResult();
+    }
+
+    @Override
+    public Member updateAllMember(String member_PK, String ID, String name, String PW) {
+        Member allUpdateMember = em.createQuery("SELECT m FROM Member m WHERE m.Member_PK =: Member_PK", Member.class)
+                        .setParameter("Member_PK", member_PK)
+                        .getSingleResult();
+        em.persist(allUpdateMember);
+        allUpdateMember.allChangeMember(ID, name, PW);
+        em.flush();
+        return allUpdateMember;
+    }
+
+    @Override
+    public Member updateMember(String member_PK, String ID, String name) {
+        Member updateMember = em.createQuery("SELECT m FROM Member m WHERE m.Member_PK =: Member_PK", Member.class)
+                .setParameter("Member_PK", member_PK)
+                .getSingleResult();
+        em.persist(updateMember);
+        updateMember.changeMember(ID, name);
+        em.flush();
+        return updateMember;
+    }
+
+    @Override
+    public List<Member> memberList() {
+        return em.createQuery("SELECT m FROM Member m", Member.class)
+                .getResultList();
+    }
+
 
 }

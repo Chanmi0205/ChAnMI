@@ -13,4 +13,12 @@ public interface MemberRepository {
 
     Member findMember(String ID);
 
+    Member login(String ID, String PW);
+
+    Member updateAllMember(String member_PK, String ID, String name, String PW);
+
+    Member updateMember(String member_PK, String ID, String name);
+
+    List<Member> memberList();
+
 }

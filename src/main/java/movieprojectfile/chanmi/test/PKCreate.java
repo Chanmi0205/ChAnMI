@@ -5,7 +5,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class PKCreate {
         public static void main(String[] args) {
 
-            int count = 100;
+            int count = 16;
 
             for (int i = 0; i < 30; i++) {
                 String ExPKCreate = RandomStringUtils.randomAlphanumeric(count);
